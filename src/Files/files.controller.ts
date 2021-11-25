@@ -1,7 +1,18 @@
-import { Controller, Get, Post, Body } from "@nestjs/common";
+import { 
+    Controller, 
+    Get, 
+    Post, 
+    Body,
+    UseInterceptors, 
+    UploadedFile, 
+
+} from "@nestjs/common";
+import {FileInterceptor} from '@nestjs/platform-express'
 import { FilesService } from "./files.service";
 import { FileDto } from "./files.dto";
 import { IFile } from "./files.interface";
+import { imageFileFilter } from "./files.upload.util";
+import { diskStorage } from 'multer';
 
 @Controller('files')
 export class FilesController{
@@ -16,4 +27,19 @@ export class FilesController{
     insertFile(@Body() user: FileDto):Promise<IFile>{
         return this.filesService.insertFile(user)
     }
+
+    @Post('upload')
+    @UseInterceptors(
+        FileInterceptor('file', {
+            dest: './uploads'
+        }
+    ))
+    uploadFile(@UploadedFile() file){
+        const resp = {
+            oN: file.originalname,
+            fN: file.filename
+        }
+        return resp
+    }
+
 }
