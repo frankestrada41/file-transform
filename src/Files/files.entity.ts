@@ -16,4 +16,5 @@ export class File{
 
     @Column()
     hasPet:boolean;
+    
 }
