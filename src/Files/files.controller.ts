@@ -11,8 +11,7 @@ import {FileInterceptor} from '@nestjs/platform-express'
 import { FilesService } from "./files.service";
 import { FileDto } from "./files.dto";
 import { IFile } from "./files.interface";
-import { imageFileFilter } from "./files.upload.util";
-import { diskStorage } from 'multer';
+import { upload } from "./files.diskStorage";
 
 @Controller('files')
 export class FilesController{
@@ -30,9 +29,7 @@ export class FilesController{
 
     @Post('upload')
     @UseInterceptors(
-        FileInterceptor('file', {
-            dest: './uploads'
-        }
+        FileInterceptor('file', upload
     ))
     uploadFile(@UploadedFile() file){
         const resp = {

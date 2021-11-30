@@ -1,0 +1,25 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: azure;
+}
+.container{
+    border: 1px solid black;
+    border-radius: 2%;
+    min-height:400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    background-color:cornsilk;
+}
+
+input{
+    display: block;
+    margin: 10px auto;
+}
