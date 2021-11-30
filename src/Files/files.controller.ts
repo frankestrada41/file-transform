@@ -12,10 +12,12 @@ import { FilesService } from "./files.service";
 import { FileDto } from "./files.dto";
 import { IFile } from "./files.interface";
 import { upload } from "./files.diskStorage";
+import { FilesWatcher } from "./files.watcher";
+
 
 @Controller('files')
 export class FilesController{
-    constructor(private filesService: FilesService){}
+    constructor(private filesService: FilesService, private filesWatcher: FilesWatcher){}
     @Get()
      async findAll():Promise<IFile[]>{
         const list =  await this.filesService.getFiles()
@@ -36,6 +38,8 @@ export class FilesController{
             oN: file.originalname,
             fN: file.filename
         }
+        this.filesWatcher.wathc()
+
         return resp
     }
 
