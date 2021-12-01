@@ -26,8 +26,8 @@ export class FilesWatcher{
                  .map(item => item.replace('*:', '').trim())   
                 let pdfNewObj: FileDto = {name:newPdfData[0],
                                     lastName:newPdfData[1],
-                                    age:newPdfData[2],
-                                    hasPet:newPdfData[3]
+                                    age:parseInt(newPdfData[2]) ,
+                                    hasPet:JSON.parse(newPdfData[3])
                                 } 
                 p.insertFile(pdfNewObj)
         })
