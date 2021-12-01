@@ -25,21 +25,21 @@ export class FilesController{
     }
 
     @Post()
-    insertFile(@Body() user: FileDto):Promise<IFile>{
-        return this.filesService.insertFile(user)
+    insertFile(@Body() file: FileDto):Promise<IFile>{
+        return this.filesService.insertFile(file)
     }
 
     @Post('upload')
     @UseInterceptors(
         FileInterceptor('file', upload
     ))
-    uploadFile(@UploadedFile() file){
+     async uploadFile(@UploadedFile() file){
         const resp = {
             oN: file.originalname,
             fN: file.filename
         }
-        this.filesWatcher.wathc()
-
+        this.filesWatcher.watch()
+        // console.log('im ans  ',ans)
         return resp
     }
 
